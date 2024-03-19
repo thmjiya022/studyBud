@@ -94,7 +94,10 @@ def room(request,pk):
         room.participants.add(request.user)
         return redirect('room', pk=room.id)
 
-    context = {'room': room, 'room_messages':room_messages, 'participants': participants}
+    context = {'room': room, 
+               'room_messages':room_messages, 
+               'participants': participants}
+    
     return render(request, 'base/room.html', context)
 
 def user_profile(request,pk):
@@ -167,7 +170,6 @@ def delete_message(request, pk):
 
     if request.user != message.user:
         return HttpResponse('You are not allowed here!!')
-
 
     if request.method == 'POST':
         message.delete()
